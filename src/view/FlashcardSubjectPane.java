@@ -36,11 +36,7 @@ public class FlashcardSubjectPane extends ScrollPane {
 		this.grid.add(btnAddSubject, 0, 0);
 	}
 	
-	// Getters and Setters.
-	public List<Button> getButtonsArray() {
-		return this.buttonsArray;
-	}
-	
+	// Methods.
 	public void addButton(String title) {
 		Button button = new Button(title);
 		
@@ -52,13 +48,18 @@ public class FlashcardSubjectPane extends ScrollPane {
 		this.grid.add(button, 0, this.buttonsArray.size() + 1);		
 	}
 	
+	// Handlers.
 	public void addAddSubjectHandler(EventHandler<ActionEvent> handler) {
 		this.btnAddSubject.setOnAction(handler);
 	}
 	
-	
 	public void addPressSubjectHandler(EventHandler<ActionEvent> handler) {
-		this.buttonsArray.forEach(x -> x.setOnAction(handler));
+		this.buttonsArray.forEach(e -> e.setOnAction(handler));
+	}
+	
+	// Getters and Setters.
+	public List<Button> getButtonsArray() {
+		return this.buttonsArray;
 	}
 	
 	/*

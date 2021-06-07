@@ -8,6 +8,8 @@ public class FlashcardRootPane extends BorderPane {
 	private FlashcardPane fp;
 	private FlashcardAddSubjectPane fasp;
 	private FlashcardAddFlashcardPane fafp;
+	private FlashcardViewPane fvp;
+	private FlashcardEditFlashcardPane fefp;
 	
 	public FlashcardRootPane() {
 		this.setMinWidth(1000);
@@ -18,6 +20,8 @@ public class FlashcardRootPane extends BorderPane {
 		this.fp = new FlashcardPane();
 		this.fasp = new FlashcardAddSubjectPane();
 		this.fafp = new FlashcardAddFlashcardPane();
+		this.fvp = new FlashcardViewPane();
+		this.fefp = new FlashcardEditFlashcardPane();
 		
 		this.setTop(fmb);
 		this.setLeft(fsp);
@@ -42,5 +46,13 @@ public class FlashcardRootPane extends BorderPane {
 	
 	public FlashcardAddFlashcardPane getFlashcardAddFlashcardPane() {
 		return this.fafp;
+	}
+	
+	public FlashcardViewPane getFlashcardViewPane() {
+		return this.fvp;
+	}
+	
+	public FlashcardEditFlashcardPane getFlashcardEditFlashcardPane() {
+		return this.fefp;
 	}
 }

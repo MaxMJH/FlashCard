@@ -116,7 +116,7 @@ public class Flashcard {
 			
 		Flashcard other = (Flashcard) obj;
 		
-		return this.flashcardTitle.equals(other.flashcardTitle);
+		return this.flashcardTitle.equals(other.flashcardTitle) && this.subject.equals(other.subject);
 	}
 	
 	/**

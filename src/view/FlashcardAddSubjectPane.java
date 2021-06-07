@@ -48,6 +48,10 @@ public class FlashcardAddSubjectPane extends GridPane {
 		this.btnCreateSubject.setOnAction(handler);
 	}
 	
+	public void clearText() {
+		this.txtFlashcardSubject.clear();
+	}
+	
 	// Getters and Setters.
 	public String getFlashcardSubject() {
 		return this.txtFlashcardSubject.getText();

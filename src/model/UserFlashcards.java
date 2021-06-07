@@ -37,6 +37,11 @@ public class UserFlashcards {
 		this.flashcards.add(flashcard);
 	}
 	
+	/**
+	 * Allows the user to add a new subject to the ArrayList.
+	 * 
+	 * @param subject The subject type of the flashcard.
+	 */
 	public void addSubject(Subject subject) {
 		this.subjects.add(subject);
 	}
@@ -92,6 +97,18 @@ public class UserFlashcards {
 		}
 	}
 	
+	public Flashcard getFlashcard(String flashcardTitle, String currentSubject) {
+		for(int i = 0; i < this.flashcards.size(); i++) {
+			Flashcard currentFlashcard = this.flashcards.get(i);
+			
+			if(currentFlashcard.getFlashcardTitle().equals(flashcardTitle) && currentFlashcard.getSubject().toString().equals(currentSubject)) {
+				return currentFlashcard;
+			}
+		}
+		
+		return null;
+	}
+	
 	// Getters and Setters.
 	/**
 	 * Gets the list of all flashcards in the ArrayList.
@@ -102,6 +119,11 @@ public class UserFlashcards {
 		return this.flashcards;
 	}
 	
+	/**
+	 * Gets the list of all subjects in the ArrayList.
+	 * 
+	 * @return All the subjects within the ArrayList.
+	 */
 	public List<Subject> getSubjects() {
 		return this.subjects;
 	}

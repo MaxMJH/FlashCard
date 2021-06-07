@@ -13,10 +13,12 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.text.TextAlignment;
 
 public class FlashcardPane extends ScrollPane {
+	// Fields.
 	private FlowPane pane;
 	private Button btnAddFlashcard;
 	private List<Button> buttonsArray; 
 	
+	// Constructor.
 	public FlashcardPane() {
 		this.buttonsArray = new ArrayList<>();
 		this.btnAddFlashcard = new Button();
@@ -35,12 +37,33 @@ public class FlashcardPane extends ScrollPane {
 		this.setContent(pane);
 	}
 	
+	// Methods.
 	public void setupFlashcards() {
 		this.btnAddFlashcard.setText("Add Flashcard");
 		this.btnAddFlashcard.setWrapText(true);
 		this.btnAddFlashcard.setTextAlignment(TextAlignment.CENTER);
 		this.btnAddFlashcard.setPrefSize(200, 200);
 		this.pane.getChildren().add(this.btnAddFlashcard);
+	}
+	
+	public void updateFlashcard(String oldFlashcardTitle, String newFlashcardTitle) {
+		this.buttonsArray.forEach(e -> {
+			if(e.getText().equals(oldFlashcardTitle)) {
+				e.setText(newFlashcardTitle);
+			}
+		});
+	}
+	
+	public void removeFlashcard(String flashcardTitle) {
+		for(int i = 0; i < this.buttonsArray.size(); i++) {
+			Button currentButton = this.buttonsArray.get(i);
+			
+			if(currentButton.getText().equals(flashcardTitle)) {
+				this.pane.getChildren().remove(i + 1);
+				this.buttonsArray.remove(i);
+				break;
+			}
+		}
 	}
 	
 	public void clearFlashcards() {
@@ -59,30 +82,17 @@ public class FlashcardPane extends ScrollPane {
 		this.pane.getChildren().add(button);		
 	}
 	
+	// Handlers.
 	public void addAddFlashcardHandler(EventHandler<ActionEvent> handler) {
 		this.btnAddFlashcard.setOnAction(handler);
+	}
+	
+	public void addPressFlashcardHandler(EventHandler<ActionEvent> handler) {
+		this.buttonsArray.forEach(e -> e.setOnAction(handler));
 	}
 	
 	// Getters and Setters.
 	public List<Button> getButtonsArray() {
 		return this.buttonsArray;
 	}
-	
-	/*
-	public void addFlashcardsToPane(UserFlashcards flashcards) {
-		for(int i = 0; i < flashcards.size(); i++) {
-			Button button = new Button(flashcards.getFlashcard(i).getFlashcardTitle());
-			button.setWrapText(true);
-			button.setTextAlignment(TextAlignment.CENTER);
-			button.setPrefSize(200, 200);
-			pane.getChildren().add(button);
-		}
-		
-		Button button = new Button("Add Flashcard");
-		button.setWrapText(true);
-		button.setTextAlignment(TextAlignment.CENTER);
-		button.setPrefSize(200, 200);
-		pane.getChildren().add(button);
-	}
-	*/
 }

@@ -11,13 +11,13 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
-public class FlashcardAddFlashcardPane extends GridPane {
+public class FlashcardEditFlashcardPane extends GridPane {
 	private TextField txtFlashcardTitle;
 	private TextField txtFlashcardText;
-	private Button btnCreateFlashcard;
+	private Button btnEditFlashcard;
 
 	/*---- Constructor ----*/
-	public FlashcardAddFlashcardPane() {
+	public FlashcardEditFlashcardPane() {
 		// Styling.
 		this.setVgap(15);
 		this.setHgap(20);
@@ -37,7 +37,7 @@ public class FlashcardAddFlashcardPane extends GridPane {
 		this.txtFlashcardText = new TextField();
 		
 		// Initialise create profile button.
-		this.btnCreateFlashcard = new Button("Create Flashcard");
+		this.btnEditFlashcard = new Button("Edit Flashcard");
 
 		// Add controls and labels to container.
 		this.add(lblFlashcardTitle, 0, 0);
@@ -47,11 +47,11 @@ public class FlashcardAddFlashcardPane extends GridPane {
 		this.add(this.txtFlashcardText, 1, 1);
 		
 		this.add(new HBox(), 0, 2);
-		this.add(this.btnCreateFlashcard, 1, 2);
+		this.add(this.btnEditFlashcard, 1, 2);
 	}
 	
-	public void addAddFlashcardHandler(EventHandler<ActionEvent> handler) {
-		this.btnCreateFlashcard.setOnAction(handler);
+	public void addEditFlashcardHandler(EventHandler<ActionEvent> handler) {
+		this.btnEditFlashcard.setOnAction(handler);
 	}
 	
 	public void clearText() {
@@ -64,7 +64,15 @@ public class FlashcardAddFlashcardPane extends GridPane {
 		return this.txtFlashcardTitle.getText();
 	}
 	
+	public void setFlashcardTitle(String flashcardTitle) {
+		this.txtFlashcardTitle.setText(flashcardTitle);
+	}
+	
 	public String getFlashcardText() {
 		return this.txtFlashcardText.getText();
+	}
+	
+	public void setFlashcardText(String flashcardText) {
+		this.txtFlashcardText.setText(flashcardText);
 	}
 }
