@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * @version 0.1
  * @since 0.1
  */
-public class UserFlashcards {
+public class UserFlashcards implements Serializable {
 	// Fields.
 	private List<Flashcard> flashcards;
 	private List<Subject> subjects;
@@ -72,6 +73,10 @@ public class UserFlashcards {
 	 */
 	public void removeFlashcard(Flashcard flashcard) {
 		this.flashcards.remove(flashcard);
+	}
+	
+	public void removeSubject(Subject subject) {
+		this.subjects.remove(subject);
 	}
 	
 	/**

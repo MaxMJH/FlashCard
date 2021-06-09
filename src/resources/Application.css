@@ -1,0 +1,57 @@
+@font-face {
+	src: url("/resources/Oxygen-Bold.ttf");
+}
+
+.root {
+	-fx-background-color: linear-gradient(#22395D, #34568B);
+}
+
+.scroll-pane {
+	-fx-background-color: #34568B;
+}
+
+#subject-scroll-pane {
+	-fx-background-color: linear-gradient(#22395D, #34568B);
+}
+
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.menu-bar, .menu, .menu-button, .menu-item, .context-menu {
+	-fx-background-color: transparent;
+	-fx-font-family: 'Oxygen Bold';
+	-fx-text-fill: #ECF1F8;
+	-fx-font-size: 20px;
+}
+
+#flashcard-pane-footer {
+	-fx-background-color: #34568B;
+}
+
+#subject-button {
+	-fx-background-color: transparent;
+	-fx-font-family: 'Oxygen Bold';
+	-fx-text-fill: #ECF1F8;
+	-fx-font-size: 20px;
+}
+
+.label {
+	-fx-background-color: transparent;
+	-fx-font-family: 'Oxygen Bold';
+	-fx-text-fill: #ECF1F8;
+	-fx-font-size: 18px;
+}
+
+.text-area {
+	-fx-font-family: 'Oxygen Bold';
+	-fx-text-fill: #000000;
+	-fx-font-size: 18px;
+}
+
+.text-field {
+	-fx-font-family: 'Oxygen Bold';
+	-fx-text-fill: #000000;
+	-fx-font-size: 18px;
+}
+

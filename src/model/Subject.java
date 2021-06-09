@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * Represents a specific subject.
  * 
@@ -8,9 +10,9 @@ package model;
  * @version 0.1
  * @since 0.1
  */
-public class Subject {
+public class Subject implements Serializable {
 	// Fields.
-	String subjectName;
+	private String subjectName;
 	
 	// Constructors.
 	/**

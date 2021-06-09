@@ -22,10 +22,14 @@ public class FlashcardRootPane extends BorderPane {
 		this.fafp = new FlashcardAddFlashcardPane();
 		this.fvp = new FlashcardViewPane();
 		this.fefp = new FlashcardEditFlashcardPane();
-		
+
 		this.setTop(fmb);
 		this.setLeft(fsp);
 		this.setCenter(fp);
+		
+		if(this.fsp.getButtonsArray().isEmpty()) {
+			fp.setBtnRemoveSubjectVisible(false);
+		}
 	}
 
 	public FlashcardMenuBar getFlashcardMenuBar() {

@@ -17,6 +17,8 @@ public class FlashcardSubjectPane extends ScrollPane {
 	private List<Button> buttonsArray;
 	
 	public FlashcardSubjectPane() {
+		this.setId("subject-scroll-pane");
+		
 		this.buttonsArray = new ArrayList<>();
 		
 		this.setPrefSize(190, 500);
@@ -26,13 +28,15 @@ public class FlashcardSubjectPane extends ScrollPane {
 		this.grid = new GridPane();
 		this.grid.setAlignment(Pos.TOP_LEFT);
 		this.grid.setVgap(0.5);
-			
-		this.setContent(grid);
 		
+		this.setContent(grid);
+
 		this.btnAddSubject = new Button("Add Subject");
-		btnAddSubject.setWrapText(true);
-		btnAddSubject.setTextAlignment(TextAlignment.CENTER);
-		btnAddSubject.setPrefSize(Integer.MAX_VALUE, 100);
+		this.btnAddSubject.setWrapText(true);
+		this.btnAddSubject.setTextAlignment(TextAlignment.CENTER);
+		this.btnAddSubject.setPrefSize(Integer.MAX_VALUE, 100);
+		this.btnAddSubject.setId("subject-button");
+		
 		this.grid.add(btnAddSubject, 0, 0);
 	}
 	
@@ -45,7 +49,34 @@ public class FlashcardSubjectPane extends ScrollPane {
 		button.setWrapText(true);
 		button.setTextAlignment(TextAlignment.CENTER);
 		button.setPrefSize(Integer.MAX_VALUE, 100);
+		button.setId("subject-button");
 		this.grid.add(button, 0, this.buttonsArray.size() + 1);		
+	}
+	
+	public void fireLastButton(Button button) {
+		button.fire();
+	}
+	
+	public Button getLastButton() {
+		return this.buttonsArray.get(this.buttonsArray.size() - 1);
+	}
+	
+	public void removeSubject(String subject) {
+		for(int i = 0; i < this.buttonsArray.size(); i++) {
+			Button currentButton = this.buttonsArray.get(i);
+			
+			if(currentButton.getText().equals(subject)) {
+				this.grid.getChildren().remove(i + 1);
+				this.buttonsArray.remove(i);
+				break;
+			}
+		}
+	}
+	
+	public void removeAllSubjects() {
+		this.buttonsArray.clear();
+		
+		this.grid.getChildren().remove(1, this.grid.getChildren().size());
 	}
 	
 	// Handlers.
@@ -61,24 +92,4 @@ public class FlashcardSubjectPane extends ScrollPane {
 	public List<Button> getButtonsArray() {
 		return this.buttonsArray;
 	}
-	
-	/*
-	public void addSubjectsToPane(UserFlashcards flashcards) {
-		Button button;
-		
-		for(int i = 0; i < flashcards.size(); i++) {
-			button = new Button(flashcards.getFlashcard(i).getSubject().toString());
-			button.setWrapText(true);
-			button.setTextAlignment(TextAlignment.CENTER);
-			button.setPrefSize(Integer.MAX_VALUE, 100);
-			this.grid.add(button, 0, i);
-		}
-		
-		button = new Button("Add Subject");
-		button.setWrapText(true);
-		button.setTextAlignment(TextAlignment.CENTER);
-		button.setPrefSize(Integer.MAX_VALUE, 100);
-		this.grid.add(button, 0, flashcards.size() + 1);
-	}
-	*/
 }

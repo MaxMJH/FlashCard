@@ -1,5 +1,11 @@
 package controller;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -9,6 +15,7 @@ import model.UserFlashcards;
 import view.FlashcardAddFlashcardPane;
 import view.FlashcardAddSubjectPane;
 import view.FlashcardEditFlashcardPane;
+import view.FlashcardMenuBar;
 import view.FlashcardPane;
 import view.FlashcardRootPane;
 import view.FlashcardSubjectPane;
@@ -23,6 +30,7 @@ public class FlashcardController {
 	private FlashcardAddFlashcardPane fafp;
 	private FlashcardViewPane fvp;
 	private FlashcardEditFlashcardPane fefp;
+	private FlashcardMenuBar fmb;
 	private UserFlashcards model;
 	
 	private String currentSubject;
@@ -37,14 +45,20 @@ public class FlashcardController {
 		this.fafp = view.getFlashcardAddFlashcardPane();
 		this.fvp = view.getFlashcardViewPane();
 		this.fefp = view.getFlashcardEditFlashcardPane();
+		this.fmb = view.getFlashcardMenuBar();
 		this.model = model;
 		
+		fmb.addSaveHandler(new FMBAddSaveProfileHanlder());
+		fmb.addLoadHandler(new FMBAddLoadProfileHanlder());
+		
 		this.fsp.addAddSubjectHandler(new FSPAddSubjectHandler());
+		this.fp.addRemoveSubjectButton(new FPAddRemoveSubjectHandler());
 		this.fafp.addAddFlashcardHandler(new FAFPAddFlashcardHandler());
 		this.fvp.addBackButtonHandler(e -> view.setCenter(fp));
 		this.fvp.addEditButtonHandler(new FVPAddEditHandler());
 		this.fefp.addEditFlashcardHandler(new FEFPAddEditFlashcardHandler());
 		this.fvp.addRemoveButtonHandler(new FVPAddRemoveHandler());
+		this.fasp.addAddSubjectHandler(new FASPAddSubjectHandler());
 	}
 	
 	// Event Handlers.
@@ -53,6 +67,16 @@ public class FlashcardController {
 			view.setCenter(fasp);
 			
 			fasp.addAddSubjectHandler(new FASPAddSubjectHandler());
+		}
+	}
+	
+	private class FPAddRemoveSubjectHandler implements EventHandler<ActionEvent> {
+		public void handle(ActionEvent ae) {
+			model.removeSubject(new Subject(currentSubject));
+			
+			fsp.removeSubject(currentSubject);
+			
+			fp.hideAll();
 		}
 	}
 	
@@ -69,7 +93,14 @@ public class FlashcardController {
 				
 				view.setCenter(fp);
 				
-				fsp.addPressSubjectHandler(new FSPAddPressSubjectHandler());
+				fsp.addPressSubjectHandler(new FSPAddPressSubjectHandler()); 
+				
+				Button addedSubject = fsp.getButtonsArray().get(fsp.getButtonsArray().size() - 1);
+				
+				addedSubject.fire();
+				addedSubject.requestFocus();
+
+				fp.showAll();
 			}
 		}
 	}
@@ -84,6 +115,10 @@ public class FlashcardController {
 			
 			currentSubject = ((Button) ae.getSource()).getText();
 			
+			fp.setCurrentSubject(currentSubject);
+			
+			fp.showAll();
+			
 			// Show cards in subject.
 			model.getFlashcards().forEach(e -> {
 				fp.getButtonsArray().clear();
@@ -92,14 +127,14 @@ public class FlashcardController {
 					fp.addPressFlashcardHandler(new FPAddPressFlashcardHandler());
 				}
 			});
-
+			
 			fp.addAddFlashcardHandler(e -> view.setCenter(fafp));
 		}
 	}
 	
 	private class FAFPAddFlashcardHandler implements EventHandler<ActionEvent> {
 		public void handle(ActionEvent ae) {
-			if(!model.getFlashcards().contains(new Flashcard(fafp.getFlashcardText(), "", currentSubject))) {
+			if(!model.getFlashcards().contains(new Flashcard(fafp.getFlashcardTitle(), "", currentSubject))) {
 				model.addFlashcard(new Flashcard(fafp.getFlashcardTitle(), fafp.getFlashcardText(), currentSubject));
 				
 				fp.addButton(fafp.getFlashcardTitle());
@@ -158,6 +193,36 @@ public class FlashcardController {
 			fp.removeFlashcard(currentFlashcard);
 			
 			view.setCenter(fp);
+		}
+	}
+	
+	private class FMBAddSaveProfileHanlder implements EventHandler<ActionEvent> {
+		public void handle(ActionEvent ae) {
+			try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Flashcard.dat"))) {
+				oos.writeObject(model);
+				oos.flush();
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private class FMBAddLoadProfileHanlder implements EventHandler<ActionEvent> {
+		public void handle(ActionEvent ae) {
+			try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Flashcard.dat"))) {
+				model = (UserFlashcards) ois.readObject();
+
+				fsp.removeAllSubjects();
+
+				fp.hideAll();
+				
+				model.getSubjects().forEach(e -> {
+					fsp.addButton(e.getSubjectName());
+					fsp.addPressSubjectHandler(new FSPAddPressSubjectHandler()); 
+				});
+			} catch(IOException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

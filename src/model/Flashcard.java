@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * Represents a specific flashcard.
  * 
@@ -8,7 +10,7 @@ package model;
  * @version 0.1
  * @since 0.1
  */
-public class Flashcard {
+public class Flashcard implements Serializable {
 	// Fields.
 	private String flashcardTitle;
 	private String flashcardText;

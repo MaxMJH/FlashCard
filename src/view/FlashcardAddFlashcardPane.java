@@ -6,6 +6,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -13,7 +14,7 @@ import javafx.scene.layout.HBox;
 
 public class FlashcardAddFlashcardPane extends GridPane {
 	private TextField txtFlashcardTitle;
-	private TextField txtFlashcardText;
+	private TextArea txtFlashcardText;
 	private Button btnCreateFlashcard;
 
 	/*---- Constructor ----*/
@@ -34,7 +35,9 @@ public class FlashcardAddFlashcardPane extends GridPane {
 		
 		// Setup text fields.
 		this.txtFlashcardTitle = new TextField();
-		this.txtFlashcardText = new TextField();
+		this.txtFlashcardText = new TextArea();
+		
+		this.txtFlashcardText.setWrapText(true);
 		
 		// Initialise create profile button.
 		this.btnCreateFlashcard = new Button("Create Flashcard");
