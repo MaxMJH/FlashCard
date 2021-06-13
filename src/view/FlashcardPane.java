@@ -8,83 +8,66 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.TextAlignment;
 
 public class FlashcardPane extends GridPane {
-	// Fields.
+	/*---- Fields ----*/
 	private ScrollPane scrollPane;
 	private FlowPane flowPane;
 	private Button btnAddFlashcard;
-	private Button btnRemoveSubject;
 	private List<Button> buttonsArray; 
-	private Label lblCurrentSubject;
-	
-	// Constructor.
+
+	/*---- Constructor ----*/
 	public FlashcardPane() {
+		// Initialise ArrayList that will store buttons (flashcards).
 		this.buttonsArray = new ArrayList<>();
 		this.btnAddFlashcard = new Button();
 		
+		// Setup row constraints.
 		RowConstraints row = new RowConstraints();
 		row.setVgrow(Priority.ALWAYS);
+		this.getRowConstraints().addAll(row, row, new RowConstraints());
 		
+		// Setup column constraints.
 		ColumnConstraints column = new ColumnConstraints();
 		column.setHgrow(Priority.ALWAYS);
 		column.setHalignment(HPos.CENTER);
-		
 		this.getColumnConstraints().add(column);
-		this.getRowConstraints().addAll(new RowConstraints(), row, new RowConstraints());
 		
+		// Setup ScrollPane.
 		this.scrollPane = new ScrollPane();
 		this.scrollPane.setPrefSize(810, 500);
 		this.scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
 		this.scrollPane.setPadding(new Insets(20, 20, 20, 20));
 		this.scrollPane.setFitToWidth(true);
 		
+		// Set CSS Id for ScrollPane.
+		this.scrollPane.setId("flashcard-scroll-pane");
+		
+		// Setup FlowPane.
 		this.flowPane = new FlowPane();
 		this.flowPane.setPrefSize(790, 500);	
 		this.flowPane.setVgap(20);
 		this.flowPane.setHgap(20);
 		this.flowPane.setAlignment(Pos.TOP_CENTER);
-
+		
+		// Set the ScrollPane's content to the FlowPane that contains flashcards.
 		this.scrollPane.setContent(this.flowPane);
 		
-		HBox footer = new HBox();
-		
-		footer.setId("flashcard-pane-footer");
-		
-		this.btnRemoveSubject = new Button("Remove Flashcard");
-		this.btnRemoveSubject.setWrapText(true);
-		this.btnRemoveSubject.setTextAlignment(TextAlignment.CENTER);
-		this.btnRemoveSubject.setPrefSize(200, 50);
-		
-		footer.setAlignment(Pos.CENTER);
-		
-		footer.getChildren().add(this.btnRemoveSubject);
-		
-		this.flowPane.getChildren().add(footer);
-		
-		this.lblCurrentSubject = new Label("");
-		this.lblCurrentSubject.setWrapText(true);
-		this.lblCurrentSubject.setAlignment(Pos.CENTER);
-		this.lblCurrentSubject.setTextAlignment(TextAlignment.CENTER);
-		this.lblCurrentSubject.setPrefSize(810, 50);
-		
-		this.add(this.lblCurrentSubject, 0, 0);
+		// Add controls and labels to container.
 		this.add(this.scrollPane, 0, 1);
-		this.add(footer, 0, 2);
 	}
 	
-	// Methods.
+	/*---- Methods ----*/
 	public void setupFlashcards() {
 		this.btnAddFlashcard.setText("Add Flashcard");
 		this.btnAddFlashcard.setWrapText(true);
@@ -114,7 +97,6 @@ public class FlashcardPane extends GridPane {
 	}
 	
 	public void clearFlashcards() {
-		//this.buttonsArray.clear();
 		this.flowPane.getChildren().clear();
 	}
 	
@@ -133,43 +115,35 @@ public class FlashcardPane extends GridPane {
 		return this.flowPane.getChildren().isEmpty() ? true : false;
 	}
 	
-	public void setBtnRemoveSubjectVisible(boolean isVisible) {
-		this.btnRemoveSubject.setVisible(isVisible);
-	}
-	
 	public void hideAll() {
 		this.flowPane.setVisible(false);
 		this.btnAddFlashcard.setVisible(false);
-		this.btnRemoveSubject.setVisible(false);
-		this.lblCurrentSubject.setVisible(false);
 	}
 	
 	public void showAll() {
 		this.flowPane.setVisible(true);
 		this.btnAddFlashcard.setVisible(true);
-		this.btnRemoveSubject.setVisible(true);
-		this.lblCurrentSubject.setVisible(true);
 	}
 	
-	// Handlers.
+	public void setHeader(Node flashcardPaneHeader) {
+		this.add(flashcardPaneHeader, 0, 0);
+	}
+	
+	public void setFooter(Node flashcardPaneFooter) {
+		this.add(flashcardPaneFooter, 0, 2);
+	}
+	
+	/*---- Handlers ----*/
 	public void addAddFlashcardHandler(EventHandler<ActionEvent> handler) {
 		this.btnAddFlashcard.setOnAction(handler);
 	}
 	
-	public void addPressFlashcardHandler(EventHandler<ActionEvent> handler) {
+	public void addFlashcardHandler(EventHandler<ActionEvent> handler) {
 		this.buttonsArray.forEach(e -> e.setOnAction(handler));
 	}
 	
-	public void addRemoveSubjectButton(EventHandler<ActionEvent> handler) {
-		this.btnRemoveSubject.setOnAction(handler);
-	}
-	
-	// Getters and Setters.
+	/*---- Getters and Setters ----*/
 	public List<Button> getButtonsArray() {
 		return this.buttonsArray;
-	}
-	
-	public void setCurrentSubject(String currentSubject) {
-		this.lblCurrentSubject.setText(currentSubject);
 	}
 }

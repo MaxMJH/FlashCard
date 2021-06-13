@@ -8,6 +8,7 @@ import model.UserFlashcards;
 import view.FlashcardRootPane;
 
 public class ApplicationLoader extends Application {
+	/*---- Fields ----*/
 	private FlashcardRootPane view;
 	
 	@Override

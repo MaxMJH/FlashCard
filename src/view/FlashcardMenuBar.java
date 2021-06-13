@@ -7,8 +7,11 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 
 public class FlashcardMenuBar extends MenuBar {
-	private MenuItem saveItem, loadItem;
+	/*---- Fields ----*/
+	private MenuItem saveItem;
+	private MenuItem loadItem;
 	
+	/*---- Constructor ----*/
 	public FlashcardMenuBar() {
 		Menu menu = new Menu("File");
 		
@@ -21,6 +24,7 @@ public class FlashcardMenuBar extends MenuBar {
 		this.getMenus().add(menu);
 	}
 	
+	/*---- Handlers ----*/
 	public void addSaveHandler(EventHandler<ActionEvent> handler) {
 		this.saveItem.setOnAction(handler);
 	}

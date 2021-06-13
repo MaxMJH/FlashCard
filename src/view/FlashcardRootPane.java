@@ -3,60 +3,77 @@ package view;
 import javafx.scene.layout.BorderPane;
 
 public class FlashcardRootPane extends BorderPane {
-	private FlashcardMenuBar fmb;
-	private FlashcardSubjectPane fsp;
-	private FlashcardPane fp;
-	private FlashcardAddSubjectPane fasp;
-	private FlashcardAddFlashcardPane fafp;
-	private FlashcardViewPane fvp;
-	private FlashcardEditFlashcardPane fefp;
+	/*---- Fields ----*/
+	private FlashcardMenuBar flashcardMenuBar;
+	private FlashcardSubjectPane flashcardSubjectPane;
+	private FlashcardPane flashcardPane;
+	private FlashcardHeaderPane flashcardHeaderPane;
+	private FlashcardFooterPane flashcardFooterPane;
+	private FlashcardAddSubjectPane flashcardAddSubjectPane;
+	private FlashcardAddFlashcardPane flashcardAddFlashcardPane;
+	private FlashcardViewPane flashcardViewPane;
+	private FlashcardEditFlashcardPane flashcardEditFlashcardPane;
 	
-	public FlashcardRootPane() {
-		this.setMinWidth(1000);
-		this.setMinHeight(500);
+	/*---- Constructor ----*/
+	public FlashcardRootPane() {	
+		// Initialise all panes.
+		this.flashcardMenuBar = new FlashcardMenuBar();
+		this.flashcardSubjectPane = new FlashcardSubjectPane();
+		this.flashcardPane = new FlashcardPane();
+		this.flashcardHeaderPane = new FlashcardHeaderPane();
+		this.flashcardFooterPane = new FlashcardFooterPane();
+		this.flashcardAddSubjectPane = new FlashcardAddSubjectPane();
+		this.flashcardAddFlashcardPane = new FlashcardAddFlashcardPane();
+		this.flashcardViewPane = new FlashcardViewPane();
+		this.flashcardEditFlashcardPane = new FlashcardEditFlashcardPane();
 		
-		this.fmb = new FlashcardMenuBar();
-		this.fsp = new FlashcardSubjectPane();
-		this.fp = new FlashcardPane();
-		this.fasp = new FlashcardAddSubjectPane();
-		this.fafp = new FlashcardAddFlashcardPane();
-		this.fvp = new FlashcardViewPane();
-		this.fefp = new FlashcardEditFlashcardPane();
-
-		this.setTop(fmb);
-		this.setLeft(fsp);
-		this.setCenter(fp);
+		// Style BorderPane.
+		this.setMinWidth(1200);
+		this.setMinHeight(570);
+		this.setTop(flashcardMenuBar);
+		this.setLeft(flashcardSubjectPane);
+		this.setCenter(flashcardPane);
 		
-		if(this.fsp.getButtonsArray().isEmpty()) {
-			fp.setBtnRemoveSubjectVisible(false);
+		// Ensures that the remove button cannot be seen if there are no subjects.
+		if(this.flashcardSubjectPane.getButtonsArray().isEmpty()) {
+			flashcardFooterPane.setBtnRemoveSubjectVisible(false);
 		}
 	}
 
+	/*---- Getters and Setters ----*/
 	public FlashcardMenuBar getFlashcardMenuBar() {
-		return this.fmb;
+		return this.flashcardMenuBar;
 	}
 	
 	public FlashcardSubjectPane getFlashcardSubjectPane() {
-		return this.fsp;
+		return this.flashcardSubjectPane;
 	}
 	
 	public FlashcardPane getFlashcardPane() {
-		return this.fp;
+		return this.flashcardPane;
+	}
+
+	public FlashcardHeaderPane getFlashcardHeaderPane() {
+		return this.flashcardHeaderPane;
+	}
+	
+	public FlashcardFooterPane getFlashcardFooterPane() {
+		return this.flashcardFooterPane;
 	}
 	
 	public FlashcardAddSubjectPane getFlashcardAddSubjectPane() {
-		return this.fasp;
+		return this.flashcardAddSubjectPane;
 	}
 	
 	public FlashcardAddFlashcardPane getFlashcardAddFlashcardPane() {
-		return this.fafp;
+		return this.flashcardAddFlashcardPane;
 	}
 	
 	public FlashcardViewPane getFlashcardViewPane() {
-		return this.fvp;
+		return this.flashcardViewPane;
 	}
 	
 	public FlashcardEditFlashcardPane getFlashcardEditFlashcardPane() {
-		return this.fefp;
+		return this.flashcardEditFlashcardPane;
 	}
 }

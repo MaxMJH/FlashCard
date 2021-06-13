@@ -11,17 +11,10 @@ import java.io.Serializable;
  * @since 0.1
  */
 public class Subject implements Serializable {
-	// Fields.
+	/*---- Fields ----*/
 	private String subjectName;
 	
-	// Constructors.
-	/**
-	 * Initialises the subject to a default value.
-	 */
-	public Subject() {
-		this.subjectName = "";
-	}
-	
+	// Constructor.
 	/**
 	 * Initialises the subject to a specified value.
 	 * 
@@ -31,7 +24,7 @@ public class Subject implements Serializable {
 		this.subjectName = subjectName;
 	}
 	
-	// Getters and Setters.
+	/*---- Getters and Setters ----*/
 	/**
 	 * Gets the name of the subject.
 	 * 
@@ -50,7 +43,7 @@ public class Subject implements Serializable {
 		this.subjectName = subjectName;
 	}
 	
-	// Overridden Methods.
+	/*---- Overridden Methods ----*/
 	/**
 	 * @return true if <i>this</i> flashcard's subject is equal to the <i>others</i>
 	 */

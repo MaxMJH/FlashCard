@@ -17,186 +17,208 @@ import view.FlashcardAddSubjectPane;
 import view.FlashcardEditFlashcardPane;
 import view.FlashcardMenuBar;
 import view.FlashcardPane;
+import view.FlashcardFooterPane;
+import view.FlashcardHeaderPane;
 import view.FlashcardRootPane;
 import view.FlashcardSubjectPane;
 import view.FlashcardViewPane;
 
 public class FlashcardController {
-	// Fields.
+	/*---- Fields ----*/
 	private FlashcardRootPane view;
-	private FlashcardSubjectPane fsp;
-	private FlashcardPane fp;
-	private FlashcardAddSubjectPane fasp;
-	private FlashcardAddFlashcardPane fafp;
-	private FlashcardViewPane fvp;
-	private FlashcardEditFlashcardPane fefp;
-	private FlashcardMenuBar fmb;
+	private FlashcardSubjectPane flashcardSubjectPane;
+	private FlashcardPane flashcardPane;
+	private FlashcardHeaderPane flashcardHeaderPane;
+	private FlashcardFooterPane flashcardFooterPane;
+	private FlashcardAddSubjectPane flashcardAddSubjectPane;
+	private FlashcardAddFlashcardPane flashcardAddFlashcardPane;
+	private FlashcardViewPane flashcardViewPane;
+	private FlashcardEditFlashcardPane flashcardEditFlashcardPane;
+	private FlashcardMenuBar flashcardMenuBar;
 	private UserFlashcards model;
 	
 	private String currentSubject;
 	private String currentFlashcard;
 	
-	// Constructor.
+	/*---- Constructor ----*/
 	public FlashcardController(FlashcardRootPane view, UserFlashcards model) {
 		this.view = view;
-		this.fsp = view.getFlashcardSubjectPane();
-		this.fp = view.getFlashcardPane();
-		this.fasp = view.getFlashcardAddSubjectPane();
-		this.fafp = view.getFlashcardAddFlashcardPane();
-		this.fvp = view.getFlashcardViewPane();
-		this.fefp = view.getFlashcardEditFlashcardPane();
-		this.fmb = view.getFlashcardMenuBar();
+		this.flashcardSubjectPane = view.getFlashcardSubjectPane();
+		this.flashcardPane = view.getFlashcardPane();
+		this.flashcardHeaderPane = view.getFlashcardHeaderPane();
+		this.flashcardFooterPane = view.getFlashcardFooterPane();
+		this.flashcardAddSubjectPane = view.getFlashcardAddSubjectPane();
+		this.flashcardAddFlashcardPane = view.getFlashcardAddFlashcardPane();
+		this.flashcardViewPane = view.getFlashcardViewPane();
+		this.flashcardEditFlashcardPane = view.getFlashcardEditFlashcardPane();
+		this.flashcardMenuBar = view.getFlashcardMenuBar();
 		this.model = model;
 		
-		fmb.addSaveHandler(new FMBAddSaveProfileHanlder());
-		fmb.addLoadHandler(new FMBAddLoadProfileHanlder());
+		this.flashcardPane.setHeader(this.flashcardHeaderPane);
+		this.flashcardPane.setFooter(this.flashcardFooterPane);
 		
-		this.fsp.addAddSubjectHandler(new FSPAddSubjectHandler());
-		this.fp.addRemoveSubjectButton(new FPAddRemoveSubjectHandler());
-		this.fafp.addAddFlashcardHandler(new FAFPAddFlashcardHandler());
-		this.fvp.addBackButtonHandler(e -> view.setCenter(fp));
-		this.fvp.addEditButtonHandler(new FVPAddEditHandler());
-		this.fefp.addEditFlashcardHandler(new FEFPAddEditFlashcardHandler());
-		this.fvp.addRemoveButtonHandler(new FVPAddRemoveHandler());
-		this.fasp.addAddSubjectHandler(new FASPAddSubjectHandler());
+		this.attachHandlers();
 	}
 	
-	// Event Handlers.
-	private class FSPAddSubjectHandler implements EventHandler<ActionEvent> {
+	/*---- Methods ----*/
+	public void attachHandlers() {
+		this.flashcardMenuBar.addSaveHandler(new FMBSaveHandler());
+		this.flashcardMenuBar.addLoadHandler(new FMBLoadHandler());
+		
+		this.flashcardSubjectPane.addAddSubjectHandler(new FSPCreateSubjectHandler());
+		this.flashcardFooterPane.addRemoveSubjectButton(new FPFRemoveSubjectHandler());
+		this.flashcardAddSubjectPane.addCreateSubjectHandler(new FASPCreateSubjectHandler());
+		this.flashcardAddFlashcardPane.addCreateFlashcardHandler(new FAFPFlashcardHandler());
+		this.flashcardViewPane.addBackHandler(e -> view.setCenter(this.flashcardPane));
+		this.flashcardViewPane.addEditHandler(new FVPEditHandler());
+		this.flashcardViewPane.addRemoveHandler(new FVPRemoveHandler());
+		this.flashcardEditFlashcardPane.addEditFlashcardHandler(new FEFPEditFlashcardHandler());	
+	}
+	
+	/*---- Event Handlers ----*/
+	private class FSPCreateSubjectHandler implements EventHandler<ActionEvent> {
 		public void handle(ActionEvent ae) {
-			view.setCenter(fasp);
+			// Sets the Add Flashcard view to the centre of the programme.
+			view.setCenter(flashcardAddSubjectPane);
 			
-			fasp.addAddSubjectHandler(new FASPAddSubjectHandler());
+			flashcardAddSubjectPane.addCreateSubjectHandler(new FASPCreateSubjectHandler());
 		}
 	}
 	
-	private class FPAddRemoveSubjectHandler implements EventHandler<ActionEvent> {
+	private class FPFRemoveSubjectHandler implements EventHandler<ActionEvent> {
 		public void handle(ActionEvent ae) {
+			// Remove the subject from the model's subject array list.
 			model.removeSubject(new Subject(currentSubject));
 			
-			fsp.removeSubject(currentSubject);
+			// Remove the subject from the subject pane.
+			flashcardSubjectPane.removeSubject(currentSubject);
 			
-			fp.hideAll();
+			// Set the footer's remove subject button invisible as well as the central view.
+			flashcardFooterPane.setBtnRemoveSubjectVisible(false);
+			flashcardPane.hideAll();
 		}
 	}
 	
-	private class FASPAddSubjectHandler implements EventHandler<ActionEvent> {
+	private class FASPCreateSubjectHandler implements EventHandler<ActionEvent> {
 		public void handle(ActionEvent ae) {
-			if(!model.getSubjects().contains(new Subject(fasp.getFlashcardSubject()))) {
-				model.addSubject(new Subject(fasp.getFlashcardSubject()));
+			// Check if the subject being added already exists within the model.
+			if(!model.getSubjects().contains(new Subject(flashcardAddSubjectPane.getFlashcardSubject()))) {
+				model.addSubject(new Subject(flashcardAddSubjectPane.getFlashcardSubject()));
 				
-				fsp.addButton(fasp.getFlashcardSubject());
+				flashcardSubjectPane.addButton(flashcardAddSubjectPane.getFlashcardSubject());
 				
-				fp.clearFlashcards();
+				flashcardPane.clearFlashcards();
 				
-				fasp.clearText();
+				flashcardAddSubjectPane.clearText();
 				
-				view.setCenter(fp);
+				view.setCenter(flashcardPane);
 				
-				fsp.addPressSubjectHandler(new FSPAddPressSubjectHandler()); 
+				flashcardSubjectPane.addSubjectHandler(new FSPSubjectHandler()); 
 				
-				Button addedSubject = fsp.getButtonsArray().get(fsp.getButtonsArray().size() - 1);
-				
-				addedSubject.fire();
-				addedSubject.requestFocus();
+				// Set the subject into focus.
+				flashcardSubjectPane.getButtonsArray().get(flashcardSubjectPane.getButtonsArray().size() - 1).fire();
 
-				fp.showAll();
+				// Set the footer's remove subject button visible as well as the central view.
+				flashcardFooterPane.setBtnRemoveSubjectVisible(true);
+				flashcardPane.showAll();
 			}
 		}
 	}
 	
-	private class FSPAddPressSubjectHandler implements EventHandler<ActionEvent> {
+	private class FSPSubjectHandler implements EventHandler<ActionEvent> {
 		public void handle(ActionEvent ae) {
-			view.setCenter(fp); // Allows user to click on other subjects if creating one.
+			view.setCenter(flashcardPane); // Allows user to click on other subjects if creating one.
 			
-			fp.clearFlashcards();
+			flashcardPane.clearFlashcards();
 			
-			fp.setupFlashcards();
+			flashcardPane.setupFlashcards();
 			
+			// Set the currently selected subject.
 			currentSubject = ((Button) ae.getSource()).getText();
 			
-			fp.setCurrentSubject(currentSubject);
+			flashcardHeaderPane.setCurrentSubject(currentSubject);
 			
-			fp.showAll();
+			flashcardFooterPane.setBtnRemoveSubjectVisible(true);
+			flashcardPane.showAll();
 			
 			// Show cards in subject.
 			model.getFlashcards().forEach(e -> {
-				fp.getButtonsArray().clear();
+				flashcardPane.getButtonsArray().clear();
 				if(e.getSubject().toString().equals(currentSubject)) {
-					fp.addButton(e.getFlashcardTitle());
-					fp.addPressFlashcardHandler(new FPAddPressFlashcardHandler());
+					flashcardPane.addButton(e.getFlashcardTitle());
+					flashcardPane.addFlashcardHandler(new FPFlashcardHandler());
 				}
 			});
 			
-			fp.addAddFlashcardHandler(e -> view.setCenter(fafp));
+			flashcardPane.addAddFlashcardHandler(e -> view.setCenter(flashcardAddFlashcardPane));
 		}
 	}
 	
-	private class FAFPAddFlashcardHandler implements EventHandler<ActionEvent> {
+	private class FAFPFlashcardHandler implements EventHandler<ActionEvent> {
 		public void handle(ActionEvent ae) {
-			if(!model.getFlashcards().contains(new Flashcard(fafp.getFlashcardTitle(), "", currentSubject))) {
-				model.addFlashcard(new Flashcard(fafp.getFlashcardTitle(), fafp.getFlashcardText(), currentSubject));
+			if(!model.getFlashcards().contains(new Flashcard(flashcardAddFlashcardPane.getFlashcardTitle(), "", currentSubject))) {
+				model.addFlashcard(new Flashcard(flashcardAddFlashcardPane.getFlashcardTitle(), flashcardAddFlashcardPane.getFlashcardText(), currentSubject));
 				
-				fp.addButton(fafp.getFlashcardTitle());
+				flashcardPane.addButton(flashcardAddFlashcardPane.getFlashcardTitle());
 				
-				fp.addPressFlashcardHandler(new FPAddPressFlashcardHandler());
+				flashcardPane.addFlashcardHandler(new FPFlashcardHandler());
 				
-				fafp.clearText();
+				flashcardAddFlashcardPane.clearText();
 				
-				view.setCenter(fp);
+				view.setCenter(flashcardPane);
 			}	
 		}
 	}
 	
-	private class FPAddPressFlashcardHandler implements EventHandler<ActionEvent> {
+	private class FPFlashcardHandler implements EventHandler<ActionEvent> {
 		public void handle(ActionEvent ae) {
 			currentFlashcard = ((Button) ae.getSource()).getText(); 
 
 			model.getFlashcards().forEach(e -> {
 				if(e.getFlashcardTitle().equals(currentFlashcard) && e.getSubject().toString().equals(currentSubject)) {
-					fvp.setFlashcardText(e.getFlashcardText());
-					view.setCenter(fvp);
+					flashcardViewPane.setFlashcardText(e.getFlashcardText());
+					view.setCenter(flashcardViewPane);
 				}
 			});			
 		}
 	}
 	
-	private class FVPAddEditHandler implements EventHandler<ActionEvent> {
+	private class FVPEditHandler implements EventHandler<ActionEvent> {
 		public void handle(ActionEvent ae) {
-			view.setCenter(fefp);
+			view.setCenter(flashcardEditFlashcardPane);
 
 			Flashcard flashcard = model.getFlashcard(currentFlashcard, currentSubject);
 			
-			fefp.setFlashcardTitle(flashcard.getFlashcardTitle());
-			fefp.setFlashcardText(flashcard.getFlashcardText());
+			flashcardEditFlashcardPane.setFlashcardTitle(flashcard.getFlashcardTitle());
+			flashcardEditFlashcardPane.setFlashcardText(flashcard.getFlashcardText());
 		}
 	}
 	
-	private class FEFPAddEditFlashcardHandler implements EventHandler<ActionEvent> {
+	private class FEFPEditFlashcardHandler implements EventHandler<ActionEvent> {
 		public void handle(ActionEvent ae) {
 			Flashcard flashcard = model.getFlashcard(currentFlashcard, currentSubject);
 			
-			flashcard.setFlashcardTitle(fefp.getFlashcardTitle());
-			flashcard.setFlashcardText(fefp.getFlashcardText());
+			flashcard.setFlashcardTitle(flashcardEditFlashcardPane.getFlashcardTitle());
+			flashcard.setFlashcardText(flashcardEditFlashcardPane.getFlashcardText());
 			
-			fp.updateFlashcard(currentFlashcard, flashcard.getFlashcardTitle());
+			flashcardPane.updateFlashcard(currentFlashcard, flashcard.getFlashcardTitle());
 			
-			view.setCenter(fp);
+			view.setCenter(flashcardPane);
 		}
 	}
 	
-	private class FVPAddRemoveHandler implements EventHandler<ActionEvent> {
+	private class FVPRemoveHandler implements EventHandler<ActionEvent> {
 		public void handle(ActionEvent ae) {
 			Flashcard flashcard = model.getFlashcard(currentFlashcard, currentSubject);
 			
 			model.removeFlashcard(flashcard);
-			fp.removeFlashcard(currentFlashcard);
+			flashcardPane.removeFlashcard(currentFlashcard);
 			
-			view.setCenter(fp);
+			view.setCenter(flashcardPane);
 		}
 	}
 	
-	private class FMBAddSaveProfileHanlder implements EventHandler<ActionEvent> {
+	private class FMBSaveHandler implements EventHandler<ActionEvent> {
 		public void handle(ActionEvent ae) {
 			try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Flashcard.dat"))) {
 				oos.writeObject(model);
@@ -207,18 +229,21 @@ public class FlashcardController {
 		}
 	}
 	
-	private class FMBAddLoadProfileHanlder implements EventHandler<ActionEvent> {
+	private class FMBLoadHandler implements EventHandler<ActionEvent> {
 		public void handle(ActionEvent ae) {
+			view.setCenter(flashcardPane);
+			
 			try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Flashcard.dat"))) {
 				model = (UserFlashcards) ois.readObject();
 
-				fsp.removeAllSubjects();
+				flashcardSubjectPane.removeAllSubjects();
 
-				fp.hideAll();
+				flashcardFooterPane.setBtnRemoveSubjectVisible(false);
+				flashcardPane.hideAll();
 				
 				model.getSubjects().forEach(e -> {
-					fsp.addButton(e.getSubjectName());
-					fsp.addPressSubjectHandler(new FSPAddPressSubjectHandler()); 
+					flashcardSubjectPane.addButton(e.getSubjectName());
+					flashcardSubjectPane.addSubjectHandler(new FSPSubjectHandler()); 
 				});
 			} catch(IOException | ClassNotFoundException e) {
 				e.printStackTrace();

@@ -10,59 +10,55 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 
 public class FlashcardEditFlashcardPane extends GridPane {
+	/*---- Fields ----*/
 	private TextField txtFlashcardTitle;
 	private TextArea txtFlashcardText;
 	private Button btnEditFlashcard;
 
 	/*---- Constructor ----*/
 	public FlashcardEditFlashcardPane() {
-		// Styling.
+		// Style GridPane.
 		this.setVgap(15);
 		this.setHgap(20);
 		this.setAlignment(Pos.CENTER);
 
-		ColumnConstraints column0 = new ColumnConstraints();
-		column0.setHalignment(HPos.RIGHT);
-
-		this.getColumnConstraints().add(column0);
+		// Setup column constraints.
+		ColumnConstraints column = new ColumnConstraints();
+		column.setHalignment(HPos.RIGHT);
+		this.getColumnConstraints().add(column);
 		
-		// Create labels.
-		Label lblFlashcardTitle = new Label("Title: ");
-		Label lblFlashcardText = new Label("Text: ");
-		
-		// Setup text fields.
+		// Setup text fields / areas.
 		this.txtFlashcardTitle = new TextField();
 		this.txtFlashcardText = new TextArea();
-		
 		this.txtFlashcardText.setWrapText(true);
 		
-		// Initialise create profile button.
+		// Initialise edit flashcard button.
 		this.btnEditFlashcard = new Button("Edit Flashcard");
 
 		// Add controls and labels to container.
-		this.add(lblFlashcardTitle, 0, 0);
+		this.add(new Label("Title: "), 0, 0);
 		this.add(this.txtFlashcardTitle, 1, 0);
 
-		this.add(lblFlashcardText, 0, 1);
+		this.add(new Label("Text: "), 0, 1);
 		this.add(this.txtFlashcardText, 1, 1);
 		
-		this.add(new HBox(), 0, 2);
 		this.add(this.btnEditFlashcard, 1, 2);
 	}
 	
-	public void addEditFlashcardHandler(EventHandler<ActionEvent> handler) {
-		this.btnEditFlashcard.setOnAction(handler);
-	}
-	
+	/*---- Methods ----*/
 	public void clearText() {
 		this.txtFlashcardTitle.clear();
 		this.txtFlashcardText.clear();
 	}
 	
-	// Getters and Setters.
+	/*---- Handler ----*/
+	public void addEditFlashcardHandler(EventHandler<ActionEvent> handler) {
+		this.btnEditFlashcard.setOnAction(handler);
+	}
+	
+	/*---- Getters and Setters ----*/
 	public String getFlashcardTitle() {
 		return this.txtFlashcardTitle.getText();
 	}

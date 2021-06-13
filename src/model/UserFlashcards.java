@@ -15,11 +15,11 @@ import java.util.List;
  * @since 0.1
  */
 public class UserFlashcards implements Serializable {
-	// Fields.
+	/*---- Fields ----*/
 	private List<Flashcard> flashcards;
 	private List<Subject> subjects;
 	
-	// Constructor.
+	/*---- Constructor ----*/
 	/**
 	 * Initialises the ArrayList of type Flashcard.
 	 */
@@ -28,7 +28,7 @@ public class UserFlashcards implements Serializable {
 		this.subjects = new ArrayList<>();
 	}
 	
-	// Methods.
+	/*---- Methods ----*/
 	/**
 	 * Allows the user to add a new flashcard to the ArrayList.
 	 * 
@@ -75,6 +75,11 @@ public class UserFlashcards implements Serializable {
 		this.flashcards.remove(flashcard);
 	}
 	
+	/**
+	 * Allows the user to remove a subject from the ArrayList.
+	 * 
+	 * @param subject The subject that the user wishes to delete.
+	 */
 	public void removeSubject(Subject subject) {
 		this.subjects.remove(subject);
 	}
@@ -86,6 +91,16 @@ public class UserFlashcards implements Serializable {
 	 */
 	public int size() {
 		return this.flashcards.size();
+	}
+	
+	/*---- Getters and Setters ----*/
+	/**
+	 * Gets the list of all flashcards in the ArrayList.
+	 * 
+	 * @return All the flashcards within the ArrayList.
+	 */
+	public List<Flashcard> getFlashcards() {
+		return this.flashcards;
 	}
 	
 	/**
@@ -102,6 +117,13 @@ public class UserFlashcards implements Serializable {
 		}
 	}
 	
+	/**
+	 * Gets a flashcard from the ArrayList by passing a flashcard title and subject.
+	 * 
+	 * @param flashcardTitle The title of the flashcard.
+	 * @param currentSubject The subject that the flashcard belongs to.
+	 * @return A flashcard with the specified title and subject or null.
+	 */
 	public Flashcard getFlashcard(String flashcardTitle, String currentSubject) {
 		for(int i = 0; i < this.flashcards.size(); i++) {
 			Flashcard currentFlashcard = this.flashcards.get(i);
@@ -112,16 +134,6 @@ public class UserFlashcards implements Serializable {
 		}
 		
 		return null;
-	}
-	
-	// Getters and Setters.
-	/**
-	 * Gets the list of all flashcards in the ArrayList.
-	 * 
-	 * @return All the flashcards within the ArrayList.
-	 */
-	public List<Flashcard> getFlashcards() {
-		return this.flashcards;
 	}
 	
 	/**
