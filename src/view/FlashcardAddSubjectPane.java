@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 
 public class FlashcardAddSubjectPane extends GridPane {
 	/*---- Fields ----*/
@@ -25,15 +24,17 @@ public class FlashcardAddSubjectPane extends GridPane {
 
 		// Setup column constraints.
 		ColumnConstraints column = new ColumnConstraints();
-		column.setHalignment(HPos.RIGHT);
-		this.getColumnConstraints().add(column);
+		column.setHalignment(HPos.CENTER);
+		this.getColumnConstraints().addAll(column, column);
 
-		// Setup text fields.
+		// Setup text field.
 		this.txtFlashcardSubject = new TextField();
-
+		this.txtFlashcardSubject.setPrefSize(300, 10);
+		
 		// Initialise create subject button.
 		this.btnCreateSubject = new Button("Create Subject");
-
+		this.btnCreateSubject.setId("create-subject-button");
+		
 		// Add controls and labels to container.
 		this.add(new Label("Subject: "), 0, 0);
 		this.add(this.txtFlashcardSubject, 1, 0);

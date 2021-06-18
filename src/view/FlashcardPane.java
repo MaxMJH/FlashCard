@@ -23,19 +23,19 @@ public class FlashcardPane extends GridPane {
 	/*---- Fields ----*/
 	private ScrollPane scrollPane;
 	private FlowPane flowPane;
-	private Button btnAddFlashcard;
+	private Button btnCreateFlashcard;
 	private List<Button> buttonsArray; 
 
 	/*---- Constructor ----*/
 	public FlashcardPane() {
 		// Initialise ArrayList that will store buttons (flashcards).
 		this.buttonsArray = new ArrayList<>();
-		this.btnAddFlashcard = new Button();
+		this.btnCreateFlashcard = new Button();
 		
 		// Setup row constraints.
 		RowConstraints row = new RowConstraints();
 		row.setVgrow(Priority.ALWAYS);
-		this.getRowConstraints().addAll(row, row, new RowConstraints());
+		this.getRowConstraints().addAll(new RowConstraints(), row, new RowConstraints());
 		
 		// Setup column constraints.
 		ColumnConstraints column = new ColumnConstraints();
@@ -69,11 +69,11 @@ public class FlashcardPane extends GridPane {
 	
 	/*---- Methods ----*/
 	public void setupFlashcards() {
-		this.btnAddFlashcard.setText("Add Flashcard");
-		this.btnAddFlashcard.setWrapText(true);
-		this.btnAddFlashcard.setTextAlignment(TextAlignment.CENTER);
-		this.btnAddFlashcard.setPrefSize(200, 200);
-		this.flowPane.getChildren().add(this.btnAddFlashcard);
+		this.btnCreateFlashcard.setWrapText(true);
+		this.btnCreateFlashcard.setTextAlignment(TextAlignment.CENTER);
+		this.btnCreateFlashcard.setPrefSize(200, 200);
+		this.btnCreateFlashcard.setId("default-create-flashcard-button");
+		this.flowPane.getChildren().add(this.btnCreateFlashcard);
 	}
 	
 	public void updateFlashcard(String oldFlashcardTitle, String newFlashcardTitle) {
@@ -108,6 +108,7 @@ public class FlashcardPane extends GridPane {
 		button.setWrapText(true);
 		button.setTextAlignment(TextAlignment.CENTER);
 		button.setPrefSize(200, 200);
+		button.setId("flashcard");
 		this.flowPane.getChildren().add(button);		
 	}
 	
@@ -117,12 +118,12 @@ public class FlashcardPane extends GridPane {
 	
 	public void hideAll() {
 		this.flowPane.setVisible(false);
-		this.btnAddFlashcard.setVisible(false);
+		this.btnCreateFlashcard.setVisible(false);
 	}
 	
 	public void showAll() {
 		this.flowPane.setVisible(true);
-		this.btnAddFlashcard.setVisible(true);
+		this.btnCreateFlashcard.setVisible(true);
 	}
 	
 	public void setHeader(Node flashcardPaneHeader) {
@@ -134,11 +135,11 @@ public class FlashcardPane extends GridPane {
 	}
 	
 	/*---- Handlers ----*/
-	public void addAddFlashcardHandler(EventHandler<ActionEvent> handler) {
-		this.btnAddFlashcard.setOnAction(handler);
+	public void addCreateFlashcardHandler(EventHandler<ActionEvent> handler) {
+		this.btnCreateFlashcard.setOnAction(handler);
 	}
 	
-	public void addFlashcardHandler(EventHandler<ActionEvent> handler) {
+	public void addCreateFlashcardsHandler(EventHandler<ActionEvent> handler) {
 		this.buttonsArray.forEach(e -> e.setOnAction(handler));
 	}
 	

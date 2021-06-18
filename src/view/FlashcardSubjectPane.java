@@ -15,7 +15,7 @@ import javafx.scene.text.TextAlignment;
 public class FlashcardSubjectPane extends ScrollPane {
 	/*---- Fields ----*/
 	private GridPane grid;
-	private Button btnAddSubject;
+	private Button btnCreateSubject;
 	private List<Button> buttonsArray;
 	
 	/*---- Constructor ----*/
@@ -41,14 +41,14 @@ public class FlashcardSubjectPane extends ScrollPane {
 		this.setContent(this.grid);
 
 		// Initialise and setup add subject button.
-		this.btnAddSubject = new Button("Add Subject");
-		this.btnAddSubject.setWrapText(true);
-		this.btnAddSubject.setTextAlignment(TextAlignment.CENTER);
-		this.btnAddSubject.setPrefSize(Integer.MAX_VALUE, 100);
-		this.btnAddSubject.setId("subject-button");
+		this.btnCreateSubject = new Button("Create Subject");
+		this.btnCreateSubject.setWrapText(true);
+		this.btnCreateSubject.setTextAlignment(TextAlignment.CENTER);
+		this.btnCreateSubject.setPrefSize(Integer.MAX_VALUE, 100);
+		this.btnCreateSubject.setId("subject-button");
 		
 		// Add controls to container.
-		this.grid.add(btnAddSubject, 0, 0);
+		this.grid.add(btnCreateSubject, 0, 0);
 	}
 	
 	/*---- Methods ----*/
@@ -83,11 +83,11 @@ public class FlashcardSubjectPane extends ScrollPane {
 	}
 	
 	/*---- Handlers ----*/
-	public void addAddSubjectHandler(EventHandler<ActionEvent> handler) {
-		this.btnAddSubject.setOnAction(handler);
+	public void addCreateSubjectHandler(EventHandler<ActionEvent> handler) {
+		this.btnCreateSubject.setOnAction(handler);
 	}
 	
-	public void addSubjectHandler(EventHandler<ActionEvent> handler) {
+	public void addCreateSubjectsHandler(EventHandler<ActionEvent> handler) {
 		this.buttonsArray.forEach(e -> e.setOnAction(handler));
 	}
 	

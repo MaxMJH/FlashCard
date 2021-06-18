@@ -42,14 +42,17 @@ public class FlashcardViewPane extends GridPane {
 		// Initialise and setup back button.
 		this.btnBack = new Button("Back");
 		this.btnBack.setMinSize(200, 50);
+		this.btnBack.setId("back-button");
 		
 		// Initialise and setup edit button.
 		this.btnEdit = new Button("Edit");
 		this.btnEdit.setMinSize(200, 50);
+		this.btnEdit.setId("edit-flashcard-button");
 		
 		// Initialise and setup remove button.
 		this.btnRemove = new Button("Remove");
 		this.btnRemove.setMinSize(200, 50);
+		this.btnRemove.setId("remove-flashcard-button");
 		
 		// Add controls and label to container.
 		this.add(this.lblFlashcardText, 0, 0, 3, 1);
@@ -59,15 +62,15 @@ public class FlashcardViewPane extends GridPane {
 	}
 	
 	/*---- Handlers ----*/
-	public void addBackHandler(EventHandler<ActionEvent> handler) {
+	public void addBackFlashcardHandler(EventHandler<ActionEvent> handler) {
 		this.btnBack.setOnAction(handler);
 	}
 	
-	public void addEditHandler(EventHandler<ActionEvent> handler) {
+	public void addEditFlashcardHandler(EventHandler<ActionEvent> handler) {
 		this.btnEdit.setOnAction(handler);
 	}
 	
-	public void addRemoveHandler(EventHandler<ActionEvent> handler) {
+	public void addRemoveFlashcardHandler(EventHandler<ActionEvent> handler) {
 		this.btnRemove.setOnAction(handler);
 	}
 	

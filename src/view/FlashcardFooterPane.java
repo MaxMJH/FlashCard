@@ -24,6 +24,7 @@ public class FlashcardFooterPane extends VBox {
 		this.btnRemoveSubject.setWrapText(true);
 		this.btnRemoveSubject.setTextAlignment(TextAlignment.CENTER);
 		this.btnRemoveSubject.setPrefSize(200, 50);
+		this.btnRemoveSubject.setId("remove-subject-button");
 		
 		// Add control to container.
 		this.getChildren().add(this.btnRemoveSubject);

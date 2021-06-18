@@ -24,7 +24,7 @@ public class ApplicationLoader extends Application {
 		stage.setMinHeight(570);
 
 		Scene scene = new Scene(view);
-		scene.getStylesheets().add(getClass().getResource("/resources/Application.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/resources/css/Application.css").toExternalForm());
 		
 		stage.setTitle("Flashcards");
 		stage.setScene(scene);

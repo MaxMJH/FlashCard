@@ -26,8 +26,8 @@ public class FlashcardAddFlashcardPane extends GridPane {
 
 		// Setup column constraints.
 		ColumnConstraints column = new ColumnConstraints();
-		column.setHalignment(HPos.RIGHT);
-		this.getColumnConstraints().add(column);
+		column.setHalignment(HPos.CENTER);
+		this.getColumnConstraints().addAll(column, column, column);
 		
 		// Setup text fields.
 		this.txtFlashcardTitle = new TextField();
@@ -36,7 +36,8 @@ public class FlashcardAddFlashcardPane extends GridPane {
 		
 		// Initialise create flashcard button.
 		this.btnCreateFlashcard = new Button("Create Flashcard");
-
+		this.btnCreateFlashcard.setId("create-flashcard-button");
+			
 		// Add controls and labels to container.
 		this.add(new Label("Title: "), 0, 0);
 		this.add(this.txtFlashcardTitle, 1, 0);

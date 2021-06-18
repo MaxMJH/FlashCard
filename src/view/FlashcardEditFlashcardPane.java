@@ -36,7 +36,8 @@ public class FlashcardEditFlashcardPane extends GridPane {
 		
 		// Initialise edit flashcard button.
 		this.btnEditFlashcard = new Button("Edit Flashcard");
-
+		this.btnEditFlashcard.setId("edit-flashcard-button");
+		
 		// Add controls and labels to container.
 		this.add(new Label("Title: "), 0, 0);
 		this.add(this.txtFlashcardTitle, 1, 0);
