@@ -258,7 +258,7 @@ public class FlashcardController {
 				
 				model.getSubjects().forEach(e -> {
 					flashcardSubjectPane.addButton(e.getSubjectName());
-					flashcardSubjectPane.addCreateSubjectHandler(new FSPCreateSubjectHandler()); 
+					flashcardSubjectPane.addCreateSubjectsHandler(new FSPCreateSubjectsHandler()); 
 				});
 			} catch(IOException | ClassNotFoundException e) {
 				alertDialogBuilder(AlertType.ERROR, "Load Error", "There is no file to load data from", e.toString());
