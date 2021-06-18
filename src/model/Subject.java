@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * Represents a specific subject.
  * 
@@ -8,18 +10,11 @@ package model;
  * @version 0.1
  * @since 0.1
  */
-public class Subject {
-	// Fields.
-	String subjectName;
+public class Subject implements Serializable {
+	/*---- Fields ----*/
+	private String subjectName;
 	
-	// Constructors.
-	/**
-	 * Initialises the subject to a default value.
-	 */
-	public Subject() {
-		this.subjectName = "";
-	}
-	
+	// Constructor.
 	/**
 	 * Initialises the subject to a specified value.
 	 * 
@@ -29,7 +24,7 @@ public class Subject {
 		this.subjectName = subjectName;
 	}
 	
-	// Getters and Setters.
+	/*---- Getters and Setters ----*/
 	/**
 	 * Gets the name of the subject.
 	 * 
@@ -48,7 +43,7 @@ public class Subject {
 		this.subjectName = subjectName;
 	}
 	
-	// Overridden Methods.
+	/*---- Overridden Methods ----*/
 	/**
 	 * @return true if <i>this</i> flashcard's subject is equal to the <i>others</i>
 	 */

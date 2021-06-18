@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * Represents a specific flashcard.
  * 
@@ -8,34 +10,13 @@ package model;
  * @version 0.1
  * @since 0.1
  */
-public class Flashcard {
-	// Fields.
+public class Flashcard implements Serializable {
+	/*---- Fields ----*/
 	private String flashcardTitle;
 	private String flashcardText;
 	private Subject subject;
 	
-	// Constructors.
-	/**
-	 * Initialises the flashcard to a default value.
-	 */
-	public Flashcard() {
-		this.flashcardTitle = "";
-		this.flashcardText = "";
-		this.subject = new Subject();
-	}
-	
-	/**
-	 * Initialises the flashcard with specified values.
-	 * 
-	 * @param flashcardTitle The title of the flashcard.
-	 * @param flashcardText The text of the flashcard.
-	 */
-	public Flashcard(String flashcardTitle, String flashcardText) {
-		this.flashcardTitle = flashcardTitle;
-		this.flashcardText = flashcardText;
-		this.subject = new Subject("");
-	}
-	
+	/*---- Constructor ----*/
 	/**
 	 * Initialises the flashcard with specified values.
 	 * 
@@ -49,7 +30,7 @@ public class Flashcard {
 		this.subject = new Subject(subject);
 	}
 	
-	// Getters and Setters.
+	/*---- Getters and Setters ----*/
 	/**
 	 * Gets the title of the flashcard.
 	 * 
@@ -104,7 +85,7 @@ public class Flashcard {
 		this.subject = new Subject(subject);
 	}
 
-	// Overridden Methods.
+	/*---- Overridden Methods ----*/
 	/**
 	 * @return true if <i>this</i> flashcard's title is equal to the <i>others</i>
 	 */
@@ -116,7 +97,7 @@ public class Flashcard {
 			
 		Flashcard other = (Flashcard) obj;
 		
-		return this.flashcardTitle.equals(other.flashcardTitle);
+		return this.flashcardTitle.equals(other.flashcardTitle) && this.subject.equals(other.subject);
 	}
 	
 	/**

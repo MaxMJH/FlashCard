@@ -8,6 +8,7 @@ import model.UserFlashcards;
 import view.FlashcardRootPane;
 
 public class ApplicationLoader extends Application {
+	/*---- Fields ----*/
 	private FlashcardRootPane view;
 	
 	@Override
@@ -19,11 +20,14 @@ public class ApplicationLoader extends Application {
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-		stage.setMinWidth(1000);
+		stage.setMinWidth(1200);
 		stage.setMinHeight(570);
 
+		Scene scene = new Scene(view);
+		scene.getStylesheets().add(getClass().getResource("/resources/css/Application.css").toExternalForm());
+		
 		stage.setTitle("Flashcards");
-		stage.setScene(new Scene(view));
+		stage.setScene(scene);
 		stage.show();
 	}
 	
