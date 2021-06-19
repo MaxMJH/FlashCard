@@ -82,6 +82,16 @@ public class FlashcardSubjectPane extends ScrollPane {
 		this.grid.getChildren().remove(1, this.grid.getChildren().size());
 	}
 	
+	public void updateSubject(String oldSubject, String newSubject) {
+		if(!oldSubject.equals(newSubject)) {
+			this.buttonsArray.forEach(e -> {
+				if(e.getText().equals(oldSubject)) {
+					e.setText(newSubject);
+				}
+			});
+		}
+	}
+	
 	/*---- Handlers ----*/
 	public void addCreateSubjectHandler(EventHandler<ActionEvent> handler) {
 		this.btnCreateSubject.setOnAction(handler);

@@ -13,6 +13,7 @@ public class FlashcardRootPane extends BorderPane {
 	private FlashcardAddFlashcardPane flashcardAddFlashcardPane;
 	private FlashcardViewPane flashcardViewPane;
 	private FlashcardEditFlashcardPane flashcardEditFlashcardPane;
+	private FlashcardEditSubjectPane flashcardEditSubjectPane;
 	
 	/*---- Constructor ----*/
 	public FlashcardRootPane() {	
@@ -26,6 +27,7 @@ public class FlashcardRootPane extends BorderPane {
 		this.flashcardAddFlashcardPane = new FlashcardAddFlashcardPane();
 		this.flashcardViewPane = new FlashcardViewPane();
 		this.flashcardEditFlashcardPane = new FlashcardEditFlashcardPane();
+		this.flashcardEditSubjectPane = new FlashcardEditSubjectPane();
 		
 		// Style BorderPane.
 		this.setMinWidth(1200);
@@ -37,6 +39,7 @@ public class FlashcardRootPane extends BorderPane {
 		// Ensures that the remove button cannot be seen if there are no subjects.
 		if(this.flashcardSubjectPane.getButtonsArray().isEmpty()) {
 			flashcardFooterPane.setBtnRemoveSubjectVisible(false);
+			flashcardFooterPane.setBtnEditSubjectVisible(false);
 		}
 	}
 
@@ -75,5 +78,9 @@ public class FlashcardRootPane extends BorderPane {
 	
 	public FlashcardEditFlashcardPane getFlashcardEditFlashcardPane() {
 		return this.flashcardEditFlashcardPane;
+	}
+	
+	public FlashcardEditSubjectPane getFlashcardEditSubjectPane() {
+		return this.flashcardEditSubjectPane;
 	}
 }

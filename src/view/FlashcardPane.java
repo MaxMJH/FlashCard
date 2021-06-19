@@ -77,11 +77,13 @@ public class FlashcardPane extends GridPane {
 	}
 	
 	public void updateFlashcard(String oldFlashcardTitle, String newFlashcardTitle) {
-		this.buttonsArray.forEach(e -> {
-			if(e.getText().equals(oldFlashcardTitle)) {
-				e.setText(newFlashcardTitle);
-			}
-		});
+		if(!oldFlashcardTitle.equals(newFlashcardTitle)) {
+			this.buttonsArray.forEach(e -> {
+				if(e.getText().equals(oldFlashcardTitle)) {
+					e.setText(newFlashcardTitle);
+				}
+			});
+		}
 	}
 	
 	public void removeFlashcard(String flashcardTitle) {

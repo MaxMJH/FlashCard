@@ -7,7 +7,7 @@ import java.io.Serializable;
  * 
  * @author Max
  * @author MaxHarrisMJH@gmail.com
- * @version 0.1
+ * @version 0.2
  * @since 0.1
  */
 public class Flashcard implements Serializable {
@@ -24,10 +24,10 @@ public class Flashcard implements Serializable {
 	 * @param flashcardText The text of the flashcard.
 	 * @param subject The subject type of the flashcard.
 	 */
-	public Flashcard(String flashcardTitle, String flashcardText, String subject) {
+	public Flashcard(String flashcardTitle, String flashcardText, Subject subject) {
 		this.flashcardTitle = flashcardTitle;
 		this.flashcardText = flashcardText;
-		this.subject = new Subject(subject);
+		this.subject = subject;
 	}
 	
 	/*---- Getters and Setters ----*/
@@ -83,6 +83,15 @@ public class Flashcard implements Serializable {
 	 */
 	public void setSubject(String subject) {
 		this.subject = new Subject(subject);
+	}
+	
+	/**
+	 * Sets the subject of the flashcard.
+	 * 
+	 * @param subject A flashcard's subject.
+	 */
+	public void setSubject(Subject subject) {
+		this.subject = subject;
 	}
 
 	/*---- Overridden Methods ----*/

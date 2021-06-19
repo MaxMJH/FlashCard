@@ -11,7 +11,7 @@ import java.util.List;
  * 
  * @author Max Harris
  * @author MaxHarrisMJH@gmail.com
- * @version 0.1
+ * @version 0.2
  * @since 0.1
  */
 public class UserFlashcards implements Serializable {
@@ -55,7 +55,7 @@ public class UserFlashcards implements Serializable {
 	 * @param flashcardText The text of the flashcard.
 	 * @param subject The subject of the flashcard.
 	 */
-	public void editFlashcard(Flashcard flashcard, String flashcardTitle, String flashcardText, String subject) {
+	public void editFlashcard(Flashcard flashcard, String flashcardTitle, String flashcardText, Subject subject) {
 		int flashcardIndex = this.flashcards.indexOf(flashcard);
 		Flashcard tempFlashcard = this.flashcards.get(flashcardIndex);
 		
@@ -64,6 +64,23 @@ public class UserFlashcards implements Serializable {
 		tempFlashcard.setSubject(subject);
 		
 		this.flashcards.set(flashcardIndex, tempFlashcard);
+	}
+	
+	public void editSubject(Subject oldSubject, String newSubject) {
+		// Change name of subject.
+		int subjectIndex = this.subjects.indexOf(oldSubject);
+		Subject tempSubject = this.subjects.get(subjectIndex);
+		
+		tempSubject.setSubjectName(newSubject);
+		
+		this.subjects.set(subjectIndex, tempSubject);
+		
+		// Now edit flashcards to change subject.
+		this.flashcards.forEach(e -> {
+			if(e.getSubject().equals(oldSubject)) {
+				this.editFlashcard(e, e.getFlashcardTitle(), e.getFlashcardText(), tempSubject);
+			}
+		});
 	}
 	
 	/**
@@ -124,11 +141,11 @@ public class UserFlashcards implements Serializable {
 	 * @param currentSubject The subject that the flashcard belongs to.
 	 * @return A flashcard with the specified title and subject or null.
 	 */
-	public Flashcard getFlashcard(String flashcardTitle, String currentSubject) {
+	public Flashcard getFlashcard(String flashcardTitle, Subject currentSubject) {
 		for(int i = 0; i < this.flashcards.size(); i++) {
 			Flashcard currentFlashcard = this.flashcards.get(i);
 			
-			if(currentFlashcard.getFlashcardTitle().equals(flashcardTitle) && currentFlashcard.getSubject().toString().equals(currentSubject)) {
+			if(currentFlashcard.getFlashcardTitle().equals(flashcardTitle) && currentFlashcard.getSubject().equals(currentSubject)) {
 				return currentFlashcard;
 			}
 		}
