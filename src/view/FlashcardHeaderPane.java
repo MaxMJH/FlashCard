@@ -5,11 +5,22 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
+/**
+ * A view which sets the hooder.
+ * 
+ * @author Max
+ * @author MaxHarrisMJH@gmail.com
+ * @version 0.2
+ * @since 0.1
+ */
 public class FlashcardHeaderPane extends VBox {
 	/*---- Fields ----*/
 	private Label lblCurrentSubject;
 	
 	/*---- Constructor ----*/
+	/**
+	 * Initialises the view and necessary fields.
+	 */
 	public FlashcardHeaderPane() {
 		// Style VBox.
 		this.setAlignment(Pos.CENTER);
@@ -29,6 +40,11 @@ public class FlashcardHeaderPane extends VBox {
 	}
 	
 	/*---- Getters and Setters ----*/
+	/**
+	 * Sets the current text of lblCurrentSubject (Label).
+	 * 
+	 * @param currentSubject A subject
+	 */
 	public void setCurrentSubject(String currentSubject) {
 		this.lblCurrentSubject.setText(currentSubject);
 	}

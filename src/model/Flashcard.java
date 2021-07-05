@@ -2,18 +2,21 @@ package model;
 
 import java.io.Serializable;
 
+import javafx.scene.image.Image;
+
 /**
  * Represents a specific flashcard.
  * 
  * @author Max
  * @author MaxHarrisMJH@gmail.com
- * @version 0.1
+ * @version 0.2
  * @since 0.1
  */
 public class Flashcard implements Serializable {
 	/*---- Fields ----*/
 	private String flashcardTitle;
 	private String flashcardText;
+	private String flashcardImageURL;
 	private Subject subject;
 	
 	/*---- Constructor ----*/
@@ -24,10 +27,11 @@ public class Flashcard implements Serializable {
 	 * @param flashcardText The text of the flashcard.
 	 * @param subject The subject type of the flashcard.
 	 */
-	public Flashcard(String flashcardTitle, String flashcardText, String subject) {
+	public Flashcard(String flashcardTitle, String flashcardText, String flashcardImageURL, Subject subject) {
 		this.flashcardTitle = flashcardTitle;
 		this.flashcardText = flashcardText;
-		this.subject = new Subject(subject);
+		this.flashcardImageURL = flashcardImageURL;
+		this.subject = subject;
 	}
 	
 	/*---- Getters and Setters ----*/
@@ -67,6 +71,14 @@ public class Flashcard implements Serializable {
 		this.flashcardText = flashcardText;
 	}
 	
+	public String getFlashcardImageURL() {
+		return this.flashcardImageURL;
+	}
+	
+	public void setFlashcardImageURL(String flashcardImageURL) {
+		this.flashcardImageURL = flashcardImageURL;
+	}
+	
 	/**
 	 * Gets the subject of the flashcard.
 	 * 
@@ -83,6 +95,15 @@ public class Flashcard implements Serializable {
 	 */
 	public void setSubject(String subject) {
 		this.subject = new Subject(subject);
+	}
+	
+	/**
+	 * Sets the subject of the flashcard.
+	 * 
+	 * @param subject A flashcard's subject.
+	 */
+	public void setSubject(Subject subject) {
+		this.subject = subject;
 	}
 
 	/*---- Overridden Methods ----*/

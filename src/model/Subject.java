@@ -7,7 +7,7 @@ import java.io.Serializable;
  * 
  * @author Max
  * @author MaxHarrisMJH@gmail.com
- * @version 0.1
+ * @version 0.2
  * @since 0.1
  */
 public class Subject implements Serializable {

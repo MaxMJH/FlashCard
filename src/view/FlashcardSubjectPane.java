@@ -12,6 +12,14 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
 
+/**
+ * A view which allows the user to add subjects.
+ * 
+ * @author Max
+ * @author MaxHarrisMJH@gmail.com
+ * @version 0.2
+ * @since 0.1
+ */
 public class FlashcardSubjectPane extends ScrollPane {
 	/*---- Fields ----*/
 	private GridPane grid;
@@ -19,6 +27,9 @@ public class FlashcardSubjectPane extends ScrollPane {
 	private List<Button> buttonsArray;
 	
 	/*---- Constructor ----*/
+	/**
+	 * Initialises the view and necessary fields.
+	 */
 	public FlashcardSubjectPane() {
 		// Initialise the ArrayList that will store buttons (subjects).
 		this.buttonsArray = new ArrayList<>();
@@ -52,6 +63,11 @@ public class FlashcardSubjectPane extends ScrollPane {
 	}
 	
 	/*---- Methods ----*/
+	/**
+	 * Adds a subject (Button) to the view.
+	 * 
+	 * @param title Title of the subject.
+	 */
 	public void addButton(String title) {
 		Button button = new Button(title);
 		
@@ -64,6 +80,11 @@ public class FlashcardSubjectPane extends ScrollPane {
 		this.grid.add(button, 0, this.buttonsArray.size() + 1);		
 	}
 	
+	/**
+	 * Removes a subject by specifying an existing subject.
+	 * 
+	 * @param subject Title of subject to be removed.
+	 */
 	public void removeSubject(String subject) {
 		for(int i = 0; i < this.buttonsArray.size(); i++) {
 			Button currentButton = this.buttonsArray.get(i);
@@ -76,22 +97,56 @@ public class FlashcardSubjectPane extends ScrollPane {
 		}
 	}
 	
+	/**
+	 * Removes all subjects from the view.
+	 */
 	public void removeAllSubjects() {
 		this.buttonsArray.clear();
 		
 		this.grid.getChildren().remove(1, this.grid.getChildren().size());
 	}
 	
+	/**
+	 * Updates a subject's title by passing an existing subject title as well as the new subject title.
+	 * 
+	 * @param oldSubject Title of subject that the user wants to replace.
+	 * @param newSubject Title in which the subject will replace.
+	 */
+	public void updateSubject(String oldSubject, String newSubject) {
+		if(!oldSubject.equals(newSubject)) {
+			this.buttonsArray.forEach(e -> {
+				if(e.getText().equals(oldSubject)) {
+					e.setText(newSubject);
+				}
+			});
+		}
+	}
+	
 	/*---- Handlers ----*/
+	/**
+	 * Adds an event handler to btnCreateSubject.
+	 * 
+	 * @param handler
+	 */
 	public void addCreateSubjectHandler(EventHandler<ActionEvent> handler) {
 		this.btnCreateSubject.setOnAction(handler);
 	}
 	
+	/**
+	 * Adds an event handler to newly created subjects (Button).
+	 * 
+	 * @param handler The event handler.
+	 */
 	public void addCreateSubjectsHandler(EventHandler<ActionEvent> handler) {
 		this.buttonsArray.forEach(e -> e.setOnAction(handler));
 	}
 	
 	/*---- Getters and Setters ----*/
+	/**
+	 * Returns the array in which all subjects (Button) are stored.
+	 * 
+	 * @return The array in which all subjects (Button) are stored.
+	 */
 	public List<Button> getButtonsArray() {
 		return this.buttonsArray;
 	}

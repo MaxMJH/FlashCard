@@ -56,7 +56,7 @@
 	-fx-font-size: 20px;
 }
 
-#create-subject-button, #remove-subject-button, #create-flashcard-button, #back-button, #edit-flashcard-button, #remove-flashcard-button {
+#create-subject-button, #remove-subject-button, #edit-subject-button, #create-flashcard-button, #back-button, #edit-flashcard-button, #remove-flashcard-button {
 	-fx-background-color: #D6D6D6;
 	-fx-background-radius: 25px;
 	-fx-border-radius: 25px;
@@ -87,6 +87,16 @@
 	-fx-font-family: 'Oxygen Bold';
 	-fx-text-fill: #FFFFFF;
 	-fx-background-image: url("/resources/images/add-flashcard-button.png");
+}
+
+#add-flashcardimage-button {
+	-fx-background-color: Transparent;
+	-fx-background-image: url("/resources/images/add-flashcardimage-button.png");
+}
+
+#remove-flashcardimage-button {
+	-fx-background-color: Transparent;
+	-fx-background-image: url("/resources/images/remove-flashcardimage-button.png");
 }
 
 #flashcard {
