@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 
+import javafx.scene.image.Image;
+
 /**
  * Represents a specific flashcard.
  * 
@@ -14,6 +16,7 @@ public class Flashcard implements Serializable {
 	/*---- Fields ----*/
 	private String flashcardTitle;
 	private String flashcardText;
+	private String flashcardImageURL;
 	private Subject subject;
 	
 	/*---- Constructor ----*/
@@ -24,9 +27,10 @@ public class Flashcard implements Serializable {
 	 * @param flashcardText The text of the flashcard.
 	 * @param subject The subject type of the flashcard.
 	 */
-	public Flashcard(String flashcardTitle, String flashcardText, Subject subject) {
+	public Flashcard(String flashcardTitle, String flashcardText, String flashcardImageURL, Subject subject) {
 		this.flashcardTitle = flashcardTitle;
 		this.flashcardText = flashcardText;
+		this.flashcardImageURL = flashcardImageURL;
 		this.subject = subject;
 	}
 	
@@ -65,6 +69,14 @@ public class Flashcard implements Serializable {
 	 */
 	public void setFlashcardText(String flashcardText) {
 		this.flashcardText = flashcardText;
+	}
+	
+	public String getFlashcardImageURL() {
+		return this.flashcardImageURL;
+	}
+	
+	public void setFlashcardImageURL(String flashcardImageURL) {
+		this.flashcardImageURL = flashcardImageURL;
 	}
 	
 	/**

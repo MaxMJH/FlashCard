@@ -55,12 +55,13 @@ public class UserFlashcards implements Serializable {
 	 * @param flashcardText The text of the flashcard.
 	 * @param subject The subject of the flashcard.
 	 */
-	public void editFlashcard(Flashcard flashcard, String flashcardTitle, String flashcardText, Subject subject) {
+	public void editFlashcard(Flashcard flashcard, String flashcardTitle, String flashcardText, String flashcardImageURL, Subject subject) {
 		int flashcardIndex = this.flashcards.indexOf(flashcard);
 		Flashcard tempFlashcard = this.flashcards.get(flashcardIndex);
 		
 		tempFlashcard.setFlashcardTitle(flashcardTitle);
 		tempFlashcard.setFlashcardText(flashcardText);
+		tempFlashcard.setFlashcardImageURL(flashcardImageURL);
 		tempFlashcard.setSubject(subject);
 		
 		this.flashcards.set(flashcardIndex, tempFlashcard);
@@ -78,7 +79,7 @@ public class UserFlashcards implements Serializable {
 		// Now edit flashcards to change subject.
 		this.flashcards.forEach(e -> {
 			if(e.getSubject().equals(oldSubject)) {
-				this.editFlashcard(e, e.getFlashcardTitle(), e.getFlashcardText(), tempSubject);
+				this.editFlashcard(e, e.getFlashcardTitle(), e.getFlashcardText(), e.getFlashcardImageURL(), tempSubject);
 			}
 		});
 	}

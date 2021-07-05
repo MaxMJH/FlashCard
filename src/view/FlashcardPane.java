@@ -19,6 +19,14 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.TextAlignment;
 
+/**
+ * A view which shows user flashcards.
+ * 
+ * @author Max
+ * @author MaxHarrisMJH@gmail.com
+ * @version 0.2
+ * @since 0.1
+ */
 public class FlashcardPane extends GridPane {
 	/*---- Fields ----*/
 	private ScrollPane scrollPane;
@@ -27,6 +35,9 @@ public class FlashcardPane extends GridPane {
 	private List<Button> buttonsArray; 
 
 	/*---- Constructor ----*/
+	/**
+	 * Initialises the view and necessary fields. 
+	 */
 	public FlashcardPane() {
 		// Initialise ArrayList that will store buttons (flashcards).
 		this.buttonsArray = new ArrayList<>();
@@ -68,6 +79,9 @@ public class FlashcardPane extends GridPane {
 	}
 	
 	/*---- Methods ----*/
+	/**
+	 * Sets up the main add flashcard button which allows users to create a new flashcard.
+	 */
 	public void setupFlashcards() {
 		this.btnCreateFlashcard.setWrapText(true);
 		this.btnCreateFlashcard.setTextAlignment(TextAlignment.CENTER);
@@ -76,6 +90,12 @@ public class FlashcardPane extends GridPane {
 		this.flowPane.getChildren().add(this.btnCreateFlashcard);
 	}
 	
+	/**
+	 * Updates a flashcard's title by passing an existing flashcard title as well as the new flashcard title.
+	 * 
+	 * @param oldFlashcardTitle Title of flashcard that the user wants to replace.
+	 * @param newFlashcardTitle Title in which the flashcard will replace.
+	 */
 	public void updateFlashcard(String oldFlashcardTitle, String newFlashcardTitle) {
 		if(!oldFlashcardTitle.equals(newFlashcardTitle)) {
 			this.buttonsArray.forEach(e -> {
@@ -86,6 +106,11 @@ public class FlashcardPane extends GridPane {
 		}
 	}
 	
+	/**
+	 * Removes a flashcard by specifying an existing title.
+	 * 
+	 * @param flashcardTitle Title of flashcard to be deleted.
+	 */
 	public void removeFlashcard(String flashcardTitle) {
 		for(int i = 0; i < this.buttonsArray.size(); i++) {
 			Button currentButton = this.buttonsArray.get(i);
@@ -98,10 +123,18 @@ public class FlashcardPane extends GridPane {
 		}
 	}
 	
+	/**
+	 * Clears all flashcards (Button) from the view.
+	 */
 	public void clearFlashcards() {
 		this.flowPane.getChildren().clear();
 	}
 	
+	/**
+	 * Adds a flashcard (Button) to the view.
+	 * 
+	 * @param title Title of the flashcard.
+	 */
 	public void addButton(String title) {
 		Button button = new Button(title);
 		
@@ -114,38 +147,74 @@ public class FlashcardPane extends GridPane {
 		this.flowPane.getChildren().add(button);		
 	}
 	
+	/**
+	 * Checks to see if the view (FlowPane) has any children / nodes.
+	 * 
+	 * @return true if there are nodes in the FlowPane, false otherwise.
+	 */
 	public boolean isFlowPaneEmpty() {
 		return this.flowPane.getChildren().isEmpty() ? true : false;
 	}
 	
+	/**
+	 * Hides all Buttons.
+	 */
 	public void hideAll() {
 		this.flowPane.setVisible(false);
 		this.btnCreateFlashcard.setVisible(false);
 	}
 	
+	/**
+	 * Shows all Buttons.
+	 */
 	public void showAll() {
 		this.flowPane.setVisible(true);
 		this.btnCreateFlashcard.setVisible(true);
 	}
 	
+	/**
+	 * Sets the header of the view.
+	 * 
+	 * @param flashcardPaneHeader Desired header view.
+	 */
 	public void setHeader(Node flashcardPaneHeader) {
 		this.add(flashcardPaneHeader, 0, 0);
 	}
 	
+	/**
+	 * Sets the footer of the view.
+	 * 
+	 * @param flashcardPaneFooter Desired footer view.
+	 */
 	public void setFooter(Node flashcardPaneFooter) {
 		this.add(flashcardPaneFooter, 0, 2);
 	}
-	
+
 	/*---- Handlers ----*/
+	/**
+	 * Adds an event handler to btnCreateFlashcard.
+	 * 
+	 * @param handler The event handler.
+	 */
 	public void addCreateFlashcardHandler(EventHandler<ActionEvent> handler) {
 		this.btnCreateFlashcard.setOnAction(handler);
 	}
 	
+	/**
+	 * Adds an event handler to newly created flashcards (Button).
+	 * 
+	 * @param handler The event handler.
+	 */
 	public void addCreateFlashcardsHandler(EventHandler<ActionEvent> handler) {
 		this.buttonsArray.forEach(e -> e.setOnAction(handler));
 	}
 	
 	/*---- Getters and Setters ----*/
+	/**
+	 * Returns the array in which all flashcards (Button) are stored.
+	 * 
+	 * @return The array in which all flashcards (Button) are stored.
+	 */
 	public List<Button> getButtonsArray() {
 		return this.buttonsArray;
 	}

@@ -2,6 +2,14 @@ package view;
 
 import javafx.scene.layout.BorderPane;
 
+/**
+ * The main root view.
+ * 
+ * @author Max
+ * @author MaxHarrisMJH@gmail.com
+ * @version 0.2
+ * @version 0.1
+ */
 public class FlashcardRootPane extends BorderPane {
 	/*---- Fields ----*/
 	private FlashcardMenuBar flashcardMenuBar;
@@ -16,6 +24,9 @@ public class FlashcardRootPane extends BorderPane {
 	private FlashcardEditSubjectPane flashcardEditSubjectPane;
 	
 	/*---- Constructor ----*/
+	/**
+	 * Initialises the view and necessary fields.
+	 */
 	public FlashcardRootPane() {	
 		// Initialise all panes.
 		this.flashcardMenuBar = new FlashcardMenuBar();
@@ -44,42 +55,92 @@ public class FlashcardRootPane extends BorderPane {
 	}
 
 	/*---- Getters and Setters ----*/
+	/**
+	 * Gets the FlashcardMenuBar view.
+	 * 
+	 * @return The FlashcardMenuBar view.
+	 */
 	public FlashcardMenuBar getFlashcardMenuBar() {
 		return this.flashcardMenuBar;
 	}
 	
+	/**
+	 * Gets the FlashcarSubjectPane view.
+	 * 
+	 * @return The FlashcardSubjectPane view.
+	 */
 	public FlashcardSubjectPane getFlashcardSubjectPane() {
 		return this.flashcardSubjectPane;
 	}
 	
+	/**
+	 * Gets the FlashcardPane view.
+	 * 
+	 * @return The FlashcardPane view.
+	 */
 	public FlashcardPane getFlashcardPane() {
 		return this.flashcardPane;
 	}
 
+	/**
+	 * Gets the FlashcardHeaderPane view.
+	 * 
+	 * @return The FlashcardHeaderPane view.
+	 */
 	public FlashcardHeaderPane getFlashcardHeaderPane() {
 		return this.flashcardHeaderPane;
 	}
 	
+	/**
+	 * Gets the FlashcardFooterPane view.
+	 * 
+	 * @return The FlashcardFooterPane view.
+	 */
 	public FlashcardFooterPane getFlashcardFooterPane() {
 		return this.flashcardFooterPane;
 	}
 	
+	/**
+	 * Gets the FlashcardAddSubjectPane view.
+	 * 
+	 * @return The FlashcardAddSubjectPane view.
+	 */
 	public FlashcardAddSubjectPane getFlashcardAddSubjectPane() {
 		return this.flashcardAddSubjectPane;
 	}
 	
+	/**
+	 * Gets the FlashcardAddFlashcardPane view.
+	 * 
+	 * @return The FlashcardAddFlashcardPane view.
+	 */
 	public FlashcardAddFlashcardPane getFlashcardAddFlashcardPane() {
 		return this.flashcardAddFlashcardPane;
 	}
 	
+	/**
+	 * Gets the FlashcardViewPane view.
+	 * 
+	 * @return The FlaschcardViewPane view.
+	 */
 	public FlashcardViewPane getFlashcardViewPane() {
 		return this.flashcardViewPane;
 	}
 	
+	/**
+	 * Gets the FlashcardEditFlashcardPane view.
+	 * 
+	 * @return The FlashcardEditFlashcardPane view.
+	 */
 	public FlashcardEditFlashcardPane getFlashcardEditFlashcardPane() {
 		return this.flashcardEditFlashcardPane;
 	}
 	
+	/**
+	 * Gets the FlashcarEditSubjectPane view.
+	 * 
+	 * @return The FlashcardEditSubjectPane view.
+	 */
 	public FlashcardEditSubjectPane getFlashcardEditSubjectPane() {
 		return this.flashcardEditSubjectPane;
 	}

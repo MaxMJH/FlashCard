@@ -6,17 +6,27 @@ import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 
+/**
+ * A view which allows the user to edit a subject.
+ * 
+ * @author Max
+ * @author MaxHarrisMJH@gmail.com
+ * @version 0.2
+ * @since 0.1
+ */
 public class FlashcardEditSubjectPane extends GridPane {
 	/*---- Fields ----*/
 	private TextField txtSubjectText;
 	private Button btnEditSubject;
 
 	/*---- Constructor ----*/
+	/**
+	 * Initialises the view and necessary fields.
+	 */
 	public FlashcardEditSubjectPane() {
 		// Style GridPane.
 		this.setVgap(15);
@@ -43,20 +53,38 @@ public class FlashcardEditSubjectPane extends GridPane {
 	}
 	
 	/*---- Methods ----*/
+	/**
+	 * Clears text fields within the view.
+	 */
 	public void clearText() {
 		this.txtSubjectText.clear();
 	}
 	
 	/*---- Handler ----*/
+	/**
+	 * Adds an event handler to btnEditSubject.
+	 * 
+	 * @param handler The event handler.
+	 */
 	public void addEditSubjectHandler(EventHandler<ActionEvent> handler) {
 		this.btnEditSubject.setOnAction(handler);
 	}
 	
 	/*---- Getters and Setters ----*/
+	/**
+	 * Gets the current text of txtSubjectText (TextField).
+	 * 
+	 * @return A String representation of txtSubjectText.
+	 */
 	public String getSubjectText() {
 		return this.txtSubjectText.getText();
 	}
 	
+	/**
+	 * Sets the current text of txtSubjectText (TextField).
+	 * 
+	 * @param flashcardText A subject's text.
+	 */
 	public void setSubjectText(String flashcardText) {
 		this.txtSubjectText.setText(flashcardText);
 	}

@@ -10,12 +10,23 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 
+/**
+ * A view which allows the user to create a subject.
+ * 
+ * @author Max
+ * @author MaxHarrisMJH@gmail.com
+ * @version 0.2
+ * @since 0.1
+ */
 public class FlashcardAddSubjectPane extends GridPane {
 	/*---- Fields ----*/
 	private TextField txtFlashcardSubject;
 	private Button btnCreateSubject;
 
 	/*---- Constructor ----*/
+	/**
+	 * Initialises the view and necessary fields.
+	 */
 	public FlashcardAddSubjectPane() {
 		// Style GridPane.
 		this.setVgap(15);
@@ -43,16 +54,28 @@ public class FlashcardAddSubjectPane extends GridPane {
 	}
 	
 	/*---- Methods ----*/
+	/**
+	 * Clears text field within the view.
+	 */
 	public void clearText() {
 		this.txtFlashcardSubject.clear();
 	}
 	
 	/*---- Handlers ----*/
+	/**
+	 * Adds an event handler to btnCreateSubject.
+	 * @param handler The event handler.
+	 */
 	public void addCreateSubjectHandler(EventHandler<ActionEvent> handler) {
 		this.btnCreateSubject.setOnAction(handler);
 	}
 	
 	/*---- Getters and Setters ----*/
+	/**
+	 * Gets the current text of txtFlashcardSubject (TextField).
+	 * 
+	 * @return A String representation of txtFlashcardSubject.
+	 */
 	public String getFlashcardSubject() {
 		return this.txtFlashcardSubject.getText();
 	}

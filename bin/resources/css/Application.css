@@ -89,6 +89,16 @@
 	-fx-background-image: url("/resources/images/add-flashcard-button.png");
 }
 
+#add-flashcardimage-button {
+	-fx-background-color: Transparent;
+	-fx-background-image: url("/resources/images/add-flashcardimage-button.png");
+}
+
+#remove-flashcardimage-button {
+	-fx-background-color: Transparent;
+	-fx-background-image: url("/resources/images/remove-flashcardimage-button.png");
+}
+
 #flashcard {
 	-fx-background-color: #D6D6D6;
 	-fx-background-radius: 0px;
